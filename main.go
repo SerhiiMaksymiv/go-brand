@@ -5,7 +5,7 @@ import (
 	"github.com/mcsymiv/go-brand/internal/ctx"
 	"github.com/mcsymiv/go-brand/internal/file"
 	"github.com/mcsymiv/go-brand/internal/rm"
-	// "github.com/mcsymiv/go-brand/internal/rpl"
+	"github.com/mcsymiv/go-brand/internal/rpl"
 )
 
 const root string = "./"
@@ -14,22 +14,47 @@ var filename = "suites.csv"
 func main() {
 	f, _ := file.Find(root, filename)
 
-  /*
-  cr := actions.ContextReplacer{
-    Replacer: &rpl.Word{
-      Line: rpl.Line{
-        Old: "017",
-        New: "yabadabadoo",
+  ctxs := []ctx.Context{
+    &actions.ContextRemover{
+        Remover: &rm.SubLine{
+          Line: &rm.Line{
+            Token: "passed",
+          },
+        },
       },
+    &actions.ContextRemover{
+        Remover: &rm.SubLine{
+          Line: &rm.Line{
+            Token: "skipped",
+          },
+        },
     },
-  }
-  */
-
-  cr := actions.ContextRemover{
-    Remover: &rm.SubLine{
-      Line: "passed",
+    &actions.ContextRemover{
+        Remover: &rm.StartToken{
+          Line: &rm.Line{
+            Token: "\"",
+          },
+        },
     },
-  }
+    &actions.ContextRemover{
+        Remover: &rm.EndToken{
+          Line: &rm.Line{
+            Token: "\"",
+          },
+        },
+    },
+     &actions.ContextReplacer{
+        Replacer: &rpl.Word{
+          Line: rpl.Line{
+            Old: "\",\"",
+            New: "|",
+          },
+        },
+      },
+    }
 
-  ctx.Exec(&cr, f.FilePath)
+  for _, ct := range ctxs {
+    ctx.Exec(ct, f.FilePath)
+  }
+  
 }
