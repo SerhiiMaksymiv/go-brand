@@ -54,8 +54,9 @@ func main() {
       },
     &actions.ContexColtRemover{
       ColRemover: &col.SubLine{
+        Deliminer: "|",
         Line: &col.Line{
-          Token: "1,2,3,6",
+          Token: "1,2,3,4,6,7,8,10",
         },
       },
     },

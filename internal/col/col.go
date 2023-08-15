@@ -6,33 +6,35 @@ import (
   "sort"
 )
 
-
 type Line struct {
   Token string
 }
 
 type SubLine struct {
   *Line
+  Deliminer string
 }
 
-
+// Removes csv column
+// Columns to remove specified in Deliminer pattern: 1,3,4
 func (s *SubLine) Remove(line string) string {
   temp := make(map[int]string)
-  for i, l := range strings.Split(line, "|") {
+  for i, l := range strings.Split(line, s.Deliminer) {
     temp[i] = l
   }
 
-  sk := sortedKeys(temp)
-
   var arr []string
+  sk := sortedKeys(temp)
+  indxs := strings.Split(s.Get(), ",")
+
   for k := range sk {
-    if strings.Contains(s.Get(), strconv.Itoa(k)) {
+    if contains(indxs, k) {
       continue
     }
     arr = append(arr, temp[k])
   }
 
-  res := strings.Join(arr, "|")
+  res := strings.Join(arr, s.Deliminer)
 
   return res
 }
@@ -56,4 +58,19 @@ func sortedKeys(m map[int]string) ([]int) {
     }
     sort.Ints(keys)
     return keys
+}
+
+func contains(s []string, e int) bool {
+
+  var tmp []int
+  for _, v := range s {
+    num, _ := strconv.Atoi(v)
+    tmp = append(tmp, num)
+  }
+  for _, a := range tmp {
+      if a == e {
+          return true
+      }
+  }
+  return false
 }
