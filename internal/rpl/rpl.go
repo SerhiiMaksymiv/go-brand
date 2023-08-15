@@ -10,15 +10,15 @@ type Line struct {
 }
 
 type FullLine struct {
-  Line
+  *Line
 }
 
 type SubLine struct {
-  Line
+  *Line
 }
 
 type Word struct {
-  Line
+  *Line
 }
 
 func (l *Line) GetOld() string {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/mcsymiv/go-brand/internal/actions"
+	"github.com/mcsymiv/go-brand/internal/col"
 	"github.com/mcsymiv/go-brand/internal/ctx"
 	"github.com/mcsymiv/go-brand/internal/file"
 	"github.com/mcsymiv/go-brand/internal/rm"
@@ -39,19 +40,26 @@ func main() {
     &actions.ContextRemover{
         Remover: &rm.EndToken{
           Line: &rm.Line{
-            Token: "\"",
+            Token: "|\"",
           },
         },
     },
      &actions.ContextReplacer{
         Replacer: &rpl.Word{
-          Line: rpl.Line{
+          Line: &rpl.Line{
             Old: "\",\"",
             New: "|",
           },
         },
       },
-    }
+    &actions.ContexColtRemover{
+      ColRemover: &col.SubLine{
+        Line: &col.Line{
+          Token: "1,2,3,6",
+        },
+      },
+    },
+  }
 
   for _, ct := range ctxs {
     ctx.Exec(ct, f.FilePath)
