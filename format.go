@@ -1,4 +1,4 @@
-package main
+package format
 
 import (
 	"github.com/mcsymiv/go-brand/internal/actions"
@@ -6,10 +6,10 @@ import (
 	"github.com/mcsymiv/go-brand/internal/file"
 )
 
-const root string = "./"
-var filename = "suites.csv"
+// const root string = "./"
+// var filename = "suites.csv"
 
-func main() {
+func Format(root, filename string) {
 	f, _ := file.Find(root, filename)
 
   ctxs := []ctx.Context{
@@ -51,5 +51,4 @@ func main() {
   }
 
   ctx.Sort(f.FilePath)
-
 }
