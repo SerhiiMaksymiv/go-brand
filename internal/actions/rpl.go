@@ -1,18 +1,43 @@
 package actions
 
-type Replacer interface {
-  Replace(line string) string
-  GetOld() string
-  GetNew() string
+import (
+  "strings"
+)
+
+type ReplaceLine struct {
+  Old string
+  New string
 }
 
-type ContextReplacer struct {
-  // Replaces an Old line with a New line
-  // Matches full line or a substring
-  Replacer
+type ReplaceFullLine struct {
+  *ReplaceLine
 }
 
-func (rp *ContextReplacer) Action(s string) string {
-  return rp.Replacer.Replace(s)
+type ReplaceSubLine struct {
+  *ReplaceLine
 }
 
+type ReplaceWord struct {
+  *ReplaceLine
+}
+
+func (l *ReplaceFullLine) Action(line string) string {
+  if line == l.ReplaceLine.Old {
+    return l.ReplaceLine.New
+  }
+  return line
+}
+
+func (l *ReplaceSubLine) Action(line string) string {
+  if strings.Contains(line, l.ReplaceLine.Old) {
+    return l.ReplaceLine.New
+  }
+  return line
+}
+
+func (l *ReplaceWord) Action(line string) string {
+  if strings.Contains(line, l.ReplaceLine.Old) {
+    return strings.Replace(line, l.ReplaceLine.Old, l.ReplaceLine.New, -1)
+  }
+  return line
+}

@@ -80,7 +80,7 @@ func Sort(filepath string) {
     if i == 0 {
       continue
     }
-    cols := strings.Split(v, "|")
+    cols := strings.Split(v, "\",\"")
     colNumRaw := cols[1][:3]
 
     colNum, err := strconv.Atoi(colNumRaw)
@@ -92,6 +92,7 @@ func Sort(filepath string) {
   }
 
   var sortedLines []string
+  sortedLines = append(sortedLines, lines[0])
   sk := sortedKeys(linemap)
   for _, k := range sk {
     sortedLines = append(sortedLines, linemap[k])
