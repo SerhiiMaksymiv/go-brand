@@ -5,10 +5,10 @@ type ColRemover interface {
   Remove(s string) string
 }
 
-type ContexColtRemover struct {
+type ContexColRemover struct {
   ColRemover
 }
 
-func (rm *ContexColtRemover) Action(s string) string {
+func (rm *ContexColRemover) Action(s string) string {
   return rm.ColRemover.Remove(s)
 }

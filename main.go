@@ -52,7 +52,7 @@ func main() {
           },
         },
       },
-    &actions.ContexColtRemover{
+    &actions.ContexColRemover{
       ColRemover: &col.SubLine{
         Deliminer: "|",
         Line: &col.Line{
@@ -65,5 +65,7 @@ func main() {
   for _, ct := range ctxs {
     ctx.Exec(ct, f.FilePath)
   }
+
+  ctx.Sort(f.FilePath)
   
 }
