@@ -1,3 +1,3 @@
-module github.com/mcsymiv/go-brand
+module github.com/mcsymiv/go-sed
 
 go 1.19
