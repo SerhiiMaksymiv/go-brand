@@ -41,7 +41,7 @@ func main() {
         New: "\",\"",
       },
     },
-    &actions.AddLine{
+    &actions.AddEndLine{
       Line: "\"",
     },
   }
