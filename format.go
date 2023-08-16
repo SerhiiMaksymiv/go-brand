@@ -1,9 +1,9 @@
 package format
 
 import (
-	"github.com/mcsymiv/go-brand/internal/actions"
-	"github.com/mcsymiv/go-brand/internal/ctx"
-	"github.com/mcsymiv/go-brand/internal/file"
+	"github.com/mcsymiv/go-brand/actions"
+	"github.com/mcsymiv/go-brand/ctx"
+	"github.com/mcsymiv/go-brand/file"
 )
 
 // FormatFiles
