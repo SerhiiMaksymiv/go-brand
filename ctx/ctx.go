@@ -60,6 +60,9 @@ func sortedKeys(m map[int]string) ([]int) {
     return keys
 }
 
+// Sort
+// Sorts suites test result based on suite Name column
+// Uses csv default deliminer
 func Sort(filepath string) {
 	// read file into memory
 	f, err := os.Open(filepath)
