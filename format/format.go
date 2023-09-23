@@ -36,6 +36,14 @@ func FormatFiles(root, filename string) {
 				},
 			},
 
+			// covers csv edge cases with double double quotes in names
+			&actions.ReplaceWord{
+				ReplaceLine: &actions.ReplaceLine{
+					Old: "\"\"",
+					New: "'",
+				},
+			},
+
 			// removes columns with redundant data
 			&actions.RemoveColumn{
 				Deliminer: "|",
