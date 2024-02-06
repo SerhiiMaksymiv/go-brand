@@ -8,6 +8,6 @@ import (
 
 func TestFormat(t *testing.T) {
 
-  format.FormatFiles("./", "suite")
+	format.FormatFiles("./", "suite")
 
 }
