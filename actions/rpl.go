@@ -1,43 +1,43 @@
 package actions
 
 import (
-  "strings"
+	"strings"
 )
 
 type ReplaceLine struct {
-  Old string
-  New string
+	Old string
+	New string
 }
 
 type ReplaceFullLine struct {
-  *ReplaceLine
+	*ReplaceLine
 }
 
 type ReplaceSubLine struct {
-  *ReplaceLine
+	*ReplaceLine
 }
 
 type ReplaceWord struct {
-  *ReplaceLine
+	*ReplaceLine
 }
 
 func (l *ReplaceFullLine) Action(line string) string {
-  if line == l.ReplaceLine.Old {
-    return l.ReplaceLine.New
-  }
-  return line
+	if line == l.ReplaceLine.Old {
+		return l.ReplaceLine.New
+	}
+	return line
 }
 
 func (l *ReplaceSubLine) Action(line string) string {
-  if strings.Contains(line, l.ReplaceLine.Old) {
-    return l.ReplaceLine.New
-  }
-  return line
+	if strings.Contains(line, l.ReplaceLine.Old) {
+		return l.ReplaceLine.New
+	}
+	return line
 }
 
 func (l *ReplaceWord) Action(line string) string {
-  if strings.Contains(line, l.ReplaceLine.Old) {
-    return strings.Replace(line, l.ReplaceLine.Old, l.ReplaceLine.New, -1)
-  }
-  return line
+	if strings.Contains(line, l.ReplaceLine.Old) {
+		return strings.Replace(line, l.ReplaceLine.Old, l.ReplaceLine.New, -1)
+	}
+	return line
 }

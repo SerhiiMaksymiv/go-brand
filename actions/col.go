@@ -1,14 +1,13 @@
 package actions
 
-
 type ColRemover interface {
-  Remove(s string) string
+	Remove(s string) string
 }
 
 type ContexColRemover struct {
-  ColRemover
+	ColRemover
 }
 
 func (rm *ContexColRemover) Action(s string) string {
-  return rm.ColRemover.Remove(s)
+	return rm.ColRemover.Remove(s)
 }
