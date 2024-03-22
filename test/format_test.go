@@ -11,3 +11,9 @@ func TestFormat(t *testing.T) {
 	format.FormatFiles("./", "suite")
 
 }
+
+func TestFeatures(t *testing.T) {
+
+	format.FormatFeatures("./", "suite")
+
+}
