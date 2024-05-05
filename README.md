@@ -87,7 +87,7 @@ Allure csv report file of tests results
 ...
 ```
 
-What we interested in only in failed or broken tests: "Status", "Test Method" and "Name". 
+Let's say we are interested only in failed or broken tests: "Status", their corresponding scope, i.e. "Test Method" and "Name". 
 So, `format.FormatFiles(pathToFiles, fileNamePattern string)` with specified above contexes `[]ctx.Context` will result in:
 ```
 "Status","Suite","Name"
