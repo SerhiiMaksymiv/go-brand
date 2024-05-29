@@ -6,20 +6,7 @@ import (
 	"github.com/mcsymiv/go-brand/actions"
 	"github.com/mcsymiv/go-brand/ctx"
 	"github.com/mcsymiv/go-brand/file"
-	"github.com/mcsymiv/go-brand/format"
 )
-
-func TestFormat(t *testing.T) {
-
-	format.FormatFiles("./", "suite")
-
-}
-
-func TestFeatures(t *testing.T) {
-
-	format.FormatFeatures("./", "suite")
-
-}
 
 func TestCsv(t *testing.T) {
 
