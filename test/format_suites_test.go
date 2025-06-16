@@ -9,7 +9,7 @@ import (
 )
 
 func TestSuites(t *testing.T) {
-	files, _ := file.FindFiles("./", "suite.csv")
+	files, _ := file.FindFiles("./", "test.csv")
 	for _, f := range files {
 		ctxs := []ctx.Context{
 
@@ -72,22 +72,24 @@ func TestSuites(t *testing.T) {
 	}
 }
 
-func TestRemove(t *testing.T) {
-	files, _ := file.FindFiles("./", "suite.csv")
-	for _, f := range files {
-		ctxs := []ctx.Context{
+func TestCsv(t *testing.T) {
 
-			// removes columns with redundant data
-			&actions.RemoveColumn{
-				Deliminer: "\",\"",
-				RemoveLine: &actions.RemoveLine{
-					Line: "0,2",
-				},
-			},
-		}
-
-		for _, ct := range ctxs {
-			ctx.Exec(ct, f.FilePath)
-		}
+	file, err := file.Find("./", "test.csv")
+	if err != nil {
+		panic(err)
 	}
+
+	ctxs := []ctx.Context{
+		&actions.RemoveColumn{
+			Deliminer: ",",
+			RemoveLine: &actions.RemoveLine{
+				Line: "0,2",
+			},
+		},
+	}
+
+	for _, ct := range ctxs {
+		ctx.Exec(ct, file.FilePath)
+	}
+
 }
