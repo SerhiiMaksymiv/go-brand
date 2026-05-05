@@ -12,7 +12,6 @@ func TestSuites(t *testing.T) {
 	files, _ := file.FindFiles("./", "test.csv")
 	for _, f := range files {
 		ctxs := []ctx.Context{
-
 			// removes lines contains key word
 			// clears passed tests
 			&actions.RemoveSubLine{
@@ -59,21 +58,16 @@ func TestSuites(t *testing.T) {
 					New: "\",\"",
 				},
 			},
-			&actions.AddEndLine{
-				Line: "\"",
-			},
 		}
 
 		for _, ct := range ctxs {
 			ctx.Exec(ct, f.FilePath)
 		}
-
 		ctx.Sort(f.FilePath)
 	}
 }
 
 func TestCsv(t *testing.T) {
-
 	file, err := file.Find("./", "test.csv")
 	if err != nil {
 		panic(err)
@@ -91,5 +85,61 @@ func TestCsv(t *testing.T) {
 	for _, ct := range ctxs {
 		ctx.Exec(ct, file.FilePath)
 	}
+}
 
+func TestLine(t *testing.T) {
+	file, err := file.Find("./", "test.csv")
+	if err != nil {
+		panic(err)
+	}
+
+	ctxs := []ctx.Context{
+		&actions.ReplaceWord{
+			ReplaceLine: &actions.ReplaceLine{
+				Old: "\"",
+				New: "",
+			},
+		},
+
+		&actions.ReplaceWord{
+			ReplaceLine: &actions.ReplaceLine{
+				Old: "'",
+				New: "",
+			},
+		},
+
+		&actions.ReplaceSubLine{
+			ReplaceLine: &actions.ReplaceLine{
+				Old: "Suite",
+				New: "Test",
+			},
+		},
+
+		&actions.RemoveSubLine{
+			RemoveLine: &actions.RemoveLine{
+				Line: "Suite",
+			},
+		},
+
+		// clears skipped tests
+		&actions.RemoveStringAfterIndex{
+			RemoveLine: &actions.RemoveLine{
+				Line: "'",
+			},
+		},
+
+		&actions.RemoveSubLine{
+			RemoveLine: &actions.RemoveLine{
+				Line: "Tes",
+			},
+		},
+
+		&actions.AddEndLine{
+			Line: "|",
+		},
+	}
+
+	for _, ct := range ctxs {
+		ctx.Exec(ct, file.FilePath)
+	}
 }
